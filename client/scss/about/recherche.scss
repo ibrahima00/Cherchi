@@ -1,0 +1,154 @@
+
+
+
+/****** recherche resultat *****/
+#recherche-resultat{
+  height: 995px;
+  background: #fff;
+  margin: 0 auto;
+  padding: 20px 35px 20px 35px;
+ box-sizing : unset ;}
+.page-btn{
+width: 100%;
+height: 33px;
+}
+.page-btn a{
+color: #9d9d9d;
+font-size: 16px;
+text-decoration: none;
+}
+.page-precedente{
+width: 130px;
+height: 85%;
+float: left;
+margin-left: 25px;
+margin-right: 25px;
+border-right: 1px solid #cccccc;
+}
+.page-suivante{
+margin-left: 25px;
+}
+
+.annonce-resultat{
+width: 84%;
+height: 135px;
+padding: 20px 30px;
+border-top: 1px solid #cccccc;
+}
+.img-content{
+float: left;
+width: 210px;
+height: 135px;
+overflow: hidden;
+margin-right: 30px;
+border: 1px solid #cccccc;
+}
+.description-ann{
+position: relative;
+width: 515px;
+margin-left: 240px;
+margin-top: -8px;
+}
+.titre-annonce{
+width: 850px;
+height: 50px;
+}
+.titre-annonce h2{
+color: #646565;
+font-size: 20px;
+}
+.titre-annonce span{
+color: #1de18a;
+}
+.categorie{
+margin-top: -10px;
+}
+.categorie p{
+color: #9d9d9d;
+font-size: 16px;
+font-weight: bold;
+}
+.sous-desc{
+width: 94%;
+height: 46px;
+border-top: 1px solid #cccccc;
+}
+.sous-desc p{
+color: #ccc;
+font-size: 12px;
+}
+.ann-time{
+float: left;
+width: 120px;
+height: 50px;
+}
+.ann-time img{
+float: left;
+margin-top: 10px;
+margin-right: 10px;
+}
+.ann-localisation{
+float: left;
+width: 202px;
+height: 50px;
+}
+.ann-localisation img{
+float: left;
+margin-top: 6px;
+margin-right: 10px;
+transform:scale(0.8);
+}
+.voir-details-btn{
+float: right;
+width: 170px;
+height: 40px;
+position: relative;
+top: -110px;
+left: -20px;
+}
+.voir-details-btn a{
+background: #24c358;
+color: #fff;
+font-size: 16px;
+font-weight: bold;
+padding: 10px 30px;
+border-radius: 5px;
+text-decoration: none;
+-webkit-transition: all ease 0.4s;
+-o-transition: all ease 0.4s;
+transition: all ease 0.4s;
+}
+.voir-details-btn a:hover{
+box-shadow: 0px 9px 30px 0px rgba(0, 0, 0, 0.3);
+}
+.num-page{
+width: 100%;
+border-top: 1px solid #ccc;
+}
+.num-page a {
+float: left;
+color: #848484;
+margin-top: 20px;
+margin-right: 10px;
+text-decoration: none;
+padding: 8px;
+border:1px solid #ccc;
+}
+.num-page a:nth-child(1){
+margin-left: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

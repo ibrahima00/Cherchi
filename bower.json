@@ -1,0 +1,21 @@
+{
+  "name": "search-engine",
+  "authors": [
+    "nous  <moi@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bulma": "^0.6.2",
+    "axios": "^0.17.1"
+  }
+}
