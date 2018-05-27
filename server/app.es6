@@ -9,10 +9,18 @@ import strategy from './config/strategy/strategy.jwt.es6';
 import mailer from "express-mailer";
 import {findUser} from './models/UserModel';
 
+
+import corsPrefetch from 'cors-prefetch-middleware';
+import imagesUpload from 'images-upload-middleware';    
+
+
+
 import {authRouter} from './router/authRouter';
 import Router from './router/InscriptionRouter.es6';
 import index from './router/index';
 import {adsRouter} from './router/adsRouter';
+
+
 
 
 let app = express();
@@ -32,8 +40,11 @@ app.set('views', __dirname + '\\views');
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+/*app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));*/
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -53,7 +64,7 @@ app.use('/connection', authRouter);
 app.use('/inscription',Router);
 app.use('/',index);
 
-
+app.use(corsPrefetch);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

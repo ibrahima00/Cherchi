@@ -8,7 +8,9 @@ import DropdownLocation from '../Form/Components/DropdownLocation';
 import DropdownS from '../Form/Components/DropdownSub';
 import DropdownStatut from '../Form/Components/DropdownStatut';
 import {browserHistory} from 'react-router-dom';
-
+import ImagesUploader from 'react-images-uploader';
+import propTypes from 'prop-types';
+import FileBase64 from 'react-file-base64';
 
 class Annonce extends Component {
     constructor () {
@@ -22,7 +24,8 @@ class Annonce extends Component {
             email:"",
             city : "",
             street : "",
-            zip : ""
+            zip : "",
+            imageName : ""
 
         };
         this.handleClick = this.handleClick.bind(this);
@@ -77,10 +80,19 @@ class Annonce extends Component {
         return re.test(String(email).toLowerCase());
     }
 
-    handleClick() {
+
+    getFiles(files){
+        console.log("file" +JSON.stringify(files))
+        this.setState({ files: files.base64 })
+        this.setState({imageName: files.name})
+      }
+
+    handleClick(e) {
+
+        e.preventDefault();
 console.log("clicked")
         const id = localStorage.getItem('id');
-console.log("id user" +id)
+console.log("id user" +id + "img name" + this.state.imageName)
             axios.post("http://localhost:3040/ads/annonce", {
                 title: this.state.title,
                 price: this.state.price,
@@ -91,15 +103,17 @@ console.log("id user" +id)
                 city: this.state.city,
                 street: this.state.street,
                 zip:this.state.zip,
-                id : id
+                id : id,
+                imageName :this.state.imageName,
+                file:this.state.files
             }).then(res => {
                 console.log("good") ;
                 console.log(res);
-                this.props.history.push('/profile')
+                //this.props.history.push('/profile')
             }).catch(err => {
                 console.log('err', err);
                 console.log('ghalta')
-            });
+            }); 
 
 
     };
@@ -108,94 +122,126 @@ console.log("id user" +id)
         render() {
         return (
             <div>
-                <section className="hero is-fullheight">
-
-                    <div className="hero-body">
-                        <div className="container">
-                            <div className="column is-4 is-offset-4">
-
-
-                                <div className="box">
-                                    <h3 className="titlelogin">POSTER ANNONCE</h3>
-
-
-                                                <h4> Title</h4>
-                                                <Input type={'text'} value={this.state.title} onUpdate={this.handleTitleChange}
-                                                       name={'title'}  placeholder={'Ton titre'}
-                                                       icon={'fa fa-envelpe'}
+                 <section className="hero is-success is-fullheight">
+                <div className="hero-body">
+                    <div className="container has-text-centered">
+                        <div className="column is-4 is-offset-4">
+                            <h3 className="title has-text-grey">Déposer Annonce</h3>
+                           
+                            <div className="box">
+                                <figure className="avatar">
+                                    <img src="img/logo.png"/>
+                                </figure>
+                                <form>
+                                    <div className="field">
+                                        <div className="control">
+                                        <Input type={'text'} value={this.state.title} onUpdate={this.handleTitleChange}
+                                                       name={'title'}  placeholder={'Ton titre'} 
+                                                       icon={'fa fa-envelpe'} label={'Titre'} 
                                                      />
+                                        </div>
+                                    </div>
 
 
-
-                                    <Input type={'text'} value={this.state.email} onUpdate={this.handleEmailChange}
-                                           name={'email'}  placeholder={'Ton email'}
-                                           icon={'fa fa-envelpe'} label={'Email'}/>
-
-
-                                                <h4> Price </h4>
-                                                <Input type={'text'} value={this.state.price} onUpdate={this.handlePriceChange}
+                                    <div className="field">
+                                        <div className="control">
+                                        <Input type={'text'} value={this.state.price} onUpdate={this.handlePriceChange}
                                                        name={'price'}  placeholder={'Ton Prix'}
-                                                       icon={'fa fa-envelpe'}
+                                                       icon={'fa fa-envelpe'} label={'Prix'} 
                                                 />
+                                        </div>
+                                    </div>
 
+ 
 
-                                            <h4> Category</h4>
-
+                                               <div className="field">
+                                        <div className="control">
+                                        <p className="mine">  Categorie </p>
                                             <DropdownCategory label={'Category'} onUpdate={this.handleCategoryChange}
                                                               value={this.state.category} />
+                                        </div>
+                                    </div>
 
-                                            <h4> SubCategory</h4>
-                                               <DropdownS label={'SubCategory'} onUpdate={this.handleSubCategoryChange}
+
+
+                                               <div className="field">
+                                        <div className="control">
+                                        <p className="mine">  Sous-Categorie </p>
+                                            <DropdownS label={'SubCategory'} onUpdate={this.handleSubCategoryChange}
                                                        value={this.state.subCategory} />
+                                        </div>
+                                    </div>
+
+                                                
+                                                
 
 
-                                              <h4> City</h4>
-                                            <DropdownLocation label={'City'} onUpdate={this.handleCityChange}
+                                           
+
+                                               <div className="field">
+                                        <div className="control">
+                                        <p className="mine">  city</p>
+                                        <DropdownLocation label={'City'} onUpdate={this.handleCityChange}
                                                                value={this.state.city}/>
+                                        </div>
+                                    </div>
+
+                                
+                                               
+                                <div className="field">
+                                        <div className="control">
+                                        <Input type={'text'} value={this.state.street} onUpdate={this.handleStreetChange}
+                                                       name={'street'}  placeholder={'Street'} label={'Rue'} 
+                                                />
+                                        </div>
+                                    </div>
 
 
+                                              
+                                            
 
-                                                <h4> Street</h4>
-                                                <Input type={'text'} value={this.state.street} onUpdate={this.handleStreetChange}
-                                                       name={'street'}  placeholder={'Street'}
-                                                      />
-                                    <h4> Zip Code </h4>
-                                    <Input type={'text'} value={this.state.zip}
+                                   <div className="field">
+                                        <div className="control">
+                                        <Input type={'text'} value={this.state.zip}
                                            onUpdate={this.handleZipChange} name={'Zip'}
-                                            placeholder={'Zip Code'} icon={"fas fa-key"}
-                                    />
-                                    <div class="field">
-  <div className="file is-info has-name">
-    <label className="file-label">
-      <input className="file-input" type="file" name="resume"/>
-      <span className="file-cta">
-        <span className="file-icon">
-          <i className="fas fa-upload"></i>
-        </span>
-        <span className="file-label">
-          Images
-        </span>
-      </span>
-      <span className="file-name">
-        Screen Shot 2017-07-29 at 15.54.25.png
-      </span>
-    </label>
-  </div>
-</div>
-                                    <h4> Description </h4>
-                                    <textarea className="textarea"  placeholder="Description" value={this.state.description} onChange={this.handleDescriptionChange} />
-                                    <br/>
+                                            placeholder={'Zip Code'} icon={"fas fa-key"} label={'Code Postal'} 
+                                                />
+                                        </div>
+                                    </div>
+
+                                    <div className="field">
+                                        <div className="control">
+                                        <p className="mine">  Description</p>
+                                        <textarea className="textarea"  placeholder="Description" 
+                                        value={this.state.description} onChange={this.handleDescriptionChange} />
+
+                                        </div>
+                                    </div>
+                                            
+                                   
+                                 
+ 
+                                    <FileBase64
+        multiple={ false }
+        onDone={ this.getFiles.bind(this) } />
+		
+
+                                   
                                     
-                                            <Button   class={'button is-block is-info is large'}
-                                                      text={'Poster annonce'}  clickHandler={this.handleClick}/>
+<button  className="button is-block is-info is-large is-fullwidth"  onClick={this.handleClick} >Deposer annonce</button>
 
 
-                                </div>
-
+                                 </form>
                             </div>
+                            <p className="has-text-grey">
+                                <Link to={"/particular"} >Inscription</Link> &nbsp;·&nbsp;
+                                <a href="../">Oublier Mot de passe !</a> &nbsp;·&nbsp;
+                                <a href="../">Aide?</a>
+                            </p>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
 
             </div>

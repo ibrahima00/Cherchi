@@ -9,7 +9,9 @@ const adsSchema = new mongoose.Schema ({
     subCategory:{type:String},
     category:{type:String},
     adress:{type : mongoose.Schema.Types.ObjectId, ref : 'Adress'},
-    User:{type : mongoose.Schema.Types.ObjectId, ref : 'User'}
+    User:{type : mongoose.Schema.Types.ObjectId, ref : 'User'},
+    isVerified :{type : Boolean} ,
+    imageName : {type : String}
 
 });
 exports.adsSchema = adsSchema;
@@ -18,7 +20,7 @@ exports.AdsModel = Ads;
 
 
 
-exports.addAds = ({title,price,description,statut,subCategory,category,email,adress,user}) => {
+exports.addAds = ({title,price,description,statut,subCategory,category,email,adress,user,imagename}) => {
     let newAds = new Ads({
         title : title ,
         price : price ,
@@ -28,7 +30,9 @@ exports.addAds = ({title,price,description,statut,subCategory,category,email,adr
         category:category,
         email:email,
         adress : adress,
-        User : user
+        User : user._id,
+        isVerified:false,
+        imageName : imagename
     });
 
     return new Promise((resolve, reject) => {
@@ -41,7 +45,7 @@ exports.addAds = ({title,price,description,statut,subCategory,category,email,adr
 exports.findAds = () => {
 
     return new Promise((reject, resolve) => {
-        Ads.find({})
+        Ads.find({'isVerified':true})
             .populate('adress')
             .populate('User')
             .exec((err , res) => {
@@ -49,6 +53,36 @@ exports.findAds = () => {
         }) ;
     });
 };
+
+
+
+
+exports.findAdsAdmin = () => {
+
+    return new Promise((reject, resolve) => {
+        Ads.find({'isVerified':false})
+            .populate('adress')
+            .populate('User')
+            .exec((err , res) => {
+                err ? reject(err) : resolve(res);
+        }) ;
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.findAdsById = (id) => {
     return new promise((reject,resolve) => {
         Ads.findById(id , (err , res) =>{

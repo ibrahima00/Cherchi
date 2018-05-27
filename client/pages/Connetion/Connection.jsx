@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Link,Redirect} from 'react-router-dom'
 import axios from 'axios';
-import Button  from '../Form/Components/Button';
 import Input from '../Form/Components/Input';
 
     class Connection extends React.Component {
@@ -44,8 +43,7 @@ import Input from '../Form/Components/Input';
                 email: this.state.email,
                 password: this.state.password
             }).then((res) => {
-
-
+console.log('connecté')
                 localStorage.setItem('token',res.data.natija.token);
                 localStorage.setItem('id',res.data.id);
                 this.props.history.push('/profile');
@@ -84,7 +82,7 @@ import Input from '../Form/Components/Input';
                                     <div className="field">
                                         <div className="control">
                                             <Input className="input is-large" type="email" placeholder="Ton email"
-                                                   autoFocus=""   value={this.state.email} onUpdate={this.handleEmailChange} />
+                                                     value={this.state.email} onUpdate={this.handleEmailChange} />
                                         </div>
                                     </div>
 

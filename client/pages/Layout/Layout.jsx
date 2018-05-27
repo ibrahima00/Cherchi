@@ -14,7 +14,7 @@ import profile from "../profile/profile";
 import profili from "../profile/profili";
 import listAnnonce from "../Annonces/listAnnonce"
 import Admin from "../Annonces/admin"
-
+import Annonced from '../Annonces/annonced'
 
 class Layout extends Component {
     constructor(props) {
@@ -62,6 +62,7 @@ class Layout extends Component {
                     <Route  path="/particular" component={InscriptionP}/>
                     <Route  path="/company" component={InscriptionE}/>
                     <Route path ="/annonce" component ={Annonce}/>
+                    <Route path ="/annonced" component ={Annonced}/>
                     <Route path ="/listannonce" component ={listAnnonce}/>
                     <Route path ="/confirmer" component={Confirmer}/>
                     <Route path="/profile" component={profile}/>

@@ -5,7 +5,8 @@ import Input from '../Form/Components/Input';
 import Button from '../Form/Components/Button';
 import DropdownAge from '../Form/Components/DropdownAge';
 import DropdownSituation from '../Form/Components/DropdownSituation';
-import {browserHistory} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
+
 
 
 class InscriptionP extends Component {
@@ -34,6 +35,7 @@ class InscriptionP extends Component {
         this.handleLastNameChange = this.handleLastNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleConfirmPassChange = this.handleConfirmPassChange.bind(this);
         this.handleStateChange = this.handleStateChange.bind(this);
         this.handleCityChange = this.handleCityChange.bind(this);
         this.handleAgeChange =this.handleAgeChange.bind(this);
@@ -41,6 +43,7 @@ class InscriptionP extends Component {
         this.handleSituationChange =this.handleSituationChange.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
         this.handleBlurFirstName = this.handleBlurFirstName.bind(this);
+        this.handleBlurEmail = this.handleBlurEmail.bind(this);
         this.handleLastNameBlur = this.handleLastNameBlur.bind(this);
         this.handleValid = this.handleValid.bind(this);
     };
@@ -53,10 +56,20 @@ class InscriptionP extends Component {
             this.setState({errorFirstName: ''});
         }
     }
+    handleBlurEmail() {
+        if ((this.state.email.length < 7) || (!isNaN(this.state.email))) {
+            this.setState({errorEmail: 'Email trop court '});
+        }
+        else {
+            this.setState({border: {border: '1px solid green'}});
+            this.setState({errorEmail: ''});
+        }
+    }
 
     handleLastNameBlur() {
         if ((this.state.lastName.length < 4) || (!isNaN(this.state.lastName))) {
             this.setState({errorLastName: 'prenom trop court'});
+
         }
         else {
             this.setState({errorLastName: ''});
@@ -81,6 +94,10 @@ class InscriptionP extends Component {
 
     handlePasswordChange(evt) {
         this.setState({password: evt.target.value});
+    };
+
+    handleConfirmPassChange(evt) {
+        this.setState({confirmPass: evt.target.value});
     };
 
     handleAgeChange(evt) {
@@ -122,7 +139,7 @@ class InscriptionP extends Component {
 
     handleClick() {
 
-        if (this.validateEmail(this.state.email)) {
+        if (this.validateEmail(this.state.email) ) {
             axios.post("http://localhost:3040/inscription/particular", {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
@@ -138,7 +155,8 @@ class InscriptionP extends Component {
                 console.log("good") ;
                 console.log(res);
                 localStorage.setItem('token',res.data.natija.token);
-                this.props.history.push('/profile')
+                this.props.history.push('/connection')
+
             }).catch(err => {
                 console.log('err', err);
                 console.log('ghalta')
@@ -180,12 +198,18 @@ class InscriptionP extends Component {
                                 <br/>
                                 <Input type={'text'} value={this.state.email} onUpdate={this.handleEmailChange}
                                        name={'email'}  placeholder={'Ton email'}
-                                       icon={'fa fa-envelpe'} label={'Email'}/>
+                                       icon={'fa fa-envelpe'} error={this.state.errorEmail} handleBlur={this.handleBlurEmail} 
+                                       label={'Email'}/>
 
                                 <Input type={'password'} value={this.state.password}
                                        onUpdate={this.handlePasswordChange} name={'password'}
                                        placeholder={'Mot de passe'} icon={"fas fa-key"}
                                         label={'Mot de passe'}/>
+
+                                 <Input type={'password'} value={this.state.confirmPass}
+                                       onUpdate={this.handleConfirmPassChange} name={'confirmPass'}
+                                       placeholder={' Confirmer Mot de passe'} icon={"fas fa-key"}
+                                        label={'Confirmer Mot de passe'}/>
 
                                 <Input type={'text'} value={this.state.phoneNumber}
                                        onUpdate={this.handlePhoneNumberChange} name={'phoneNumber'}
@@ -203,7 +227,7 @@ class InscriptionP extends Component {
                               <p className="mine">  Situation </p>
                                 <DropdownSituation label={'Situation'} onUpdate={this.handleSituationChange}
                                                    value={this.state.situation}/>
-                                    <button  className="button is-block is-info is-large is-fullwidth"  onClick={this.handleClick} >Inscription</button>
+                                    <button className="button is-block is-info is-large is-fullwidth"  onClick={this.handleClick} >Inscription</button>
 
 
                                

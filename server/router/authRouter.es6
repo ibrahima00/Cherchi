@@ -31,8 +31,6 @@ router.get('/verify/:token', (req, res) => {
 router.route('/con').post((req, res) => {
     let email = req.body.email ;
     let password = req.body.password;
-
-
     let user = findUser(email).then((user) => {
         bcrypt.compare(password, user.password, (err, result) => {
             if(result) {
@@ -141,22 +139,19 @@ router.route('/profili').post((req, res) => {
 
 
 
-
-
-
-
+/**update Profile (modifier les cordonnées d'utulisateur) */
 router.route('/update').post((req, res) => {
-
 
     let id= req.body.id;
     let obj ={
         firstName : req.body.firstName,
         lastName : req.body.lastName,
-        email : req.body.email
+        email : req.body.email,
+        phoneNumber : req.body.phoneNumber
     }
 
             updateUser(id,obj).then((resultat) => {
-                res.status(200).json({'user': resultat});
+                res.status(200).json({'use': resultat});
             }).catch((err) => {
                 console.log('erreur erreur erreur erreur'+ err);
                 res.json(err)

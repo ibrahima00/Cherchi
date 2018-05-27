@@ -3,65 +3,7 @@ body{
 	font-family: 'Lato', sans-serif;
 	height: 100%;
 	overflow-x: hidden;
-    background: #f2f2f2;
-}
-body::-webkit-scrollbar {
-    width: 8px;
-}
- 
-body::-webkit-scrollbar-track {
-    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
-    border-left: 2px solid #e2e2e2;
-    width: 10px;
-
-}
-body::-webkit-scrollbar-thumb {
-/*  background-color: #e2e2e2;
-*/  background-color: #4cbeff;
-  -webkit-border-radius: 50px;
-    border-radius: 50px;
-}
-#entete{
-    width: 100%;
-    height: 75px;
-}
-.logo{
-    position: relative;
-    top: 10px;
-    left: 85px;
-    width: 140px;
-    margin-right: 780px;
-}
-.logo a {
-    outline: none;
-}
-.logo-img{
-    transform: scale(0.7);
-    transform-origin: 0 ;
-    -webkit-transition: ease-in 0.4s;
-    -o-transition: ease-in 0.4s;
-    transition: ease-in 0.4s;
-}
-.menu{
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    height: 60px;
-    background: #4c5c68;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding-bottom: 0;
-    -webkit-transition: ease-in 0.4s;
-    -o-transition: ease-in 0.4s;
-    transition: ease-in 0.4s;
-}
-.menu ul li {
-    display: inline-block;
-    padding-right: 23px;
-    padding-left: 23px;
-    list-style: none;
-    margin-top: -26px;
+   
 }
 
 .ul-lien{
@@ -143,12 +85,12 @@ body::-webkit-scrollbar-thumb {
     height: 995px;
     background: #fff;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 36px;
     padding: 20px 35px 20px 35px;
 }
-.images-wrapper{
+.images-wrappe{
     width: 532px;
-    height: 500px;
+    height: 370px;
     margin-right: 40px;
     float: left;
     background: #fff;
@@ -179,26 +121,26 @@ body::-webkit-scrollbar-thumb {
 
 
 /***********************/
-#image-prn-wrapper{
+#image-prn-wrappe{
     width: 530px;
     height: 340px;
     overflow: hidden;
     border:1px solid #ccc; 
 }
 
-.image-prn{
+.image-pr{
     width: 3000px;
     -webkit-transition: ease-in 0.4s;
     -o-transition: ease-in 0.4s;
     transition: ease-in 0.4s;
 }
-.image-prn ul li {
+.image-pr ul li {
     display: inline-block;
-    padding-left: 0px;
+    padding-left: 35px;
     list-style: none;
 }
 
-.img-prn{
+.img-pr{
     width: 530px;
     height: 340px;
     background: #fff;
@@ -206,7 +148,7 @@ body::-webkit-scrollbar-thumb {
     left: -40px; 
     top: -16px;
 }
-.img-prn img{
+.img-pr img{
     height: 340px;
     display: table-cell;
     margin: 0 auto;
@@ -231,10 +173,10 @@ body::-webkit-scrollbar-thumb {
     -o-transition: all ease-in-out 0.6s;
     transition: all ease-in-out 0.6s;
 }
-#image-prn-wrapper:hover .flesh-gauche {
+#image-prn-wrappe:hover .flesh-gauche {
     left: 0;
 }
-#image-prn-wrapper:hover .flesh-gauche img{
+#image-prn-wrappe:hover .flesh-gauche img{
     margin-left: 5px;
 }
 .flesh-droit{   
@@ -386,12 +328,6 @@ body::-webkit-scrollbar-thumb {
     font-size: 16px;
     padding-bottom: 10px;
 }
-.ligne-description{
-    width: 425px;
-    height: 1px;
-    background: #ccc;
-    margin-left: 572px;
-}
 .time-desc img{
     float: left;
     margin-right: 15px;
@@ -453,7 +389,7 @@ body::-webkit-scrollbar-thumb {
 /*********   details-wrapper  ********/
 .details-wrapper{
     width: 530px;
-    padding-bottom: 10px;
+    padding-bottom: 23px;
     border-bottom: 1px solid #ccc;
 }
 .details-wrapper p{
@@ -478,7 +414,7 @@ body::-webkit-scrollbar-thumb {
 
 /***** Gerer annonce ****/
 .gerer-ann{
-    margin-top: 20px;
+    margin-top: 30px;
 }
 .gerer-ann p {
     display: inline-block;

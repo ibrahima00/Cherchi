@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     email: {type: String},
     password: {type: String},
     role: { type : String, enum : ['particular', 'company', 'admin']},
-    phoneNumber:{type: Number},
+    phoneNumber:{type:String},
     isVerified: {type: Boolean, default: false}
     },{
     timestamps : true
@@ -33,15 +33,16 @@ exports.UserModel = User;
 
 
 
-exports.addUser = ({firstName, lastName, email, password,  isVerified ,phoneNumber ,role}) => {
+exports.addUser = ({firstName, lastName, email, password,  isVerified ,role,phoneNumber }) => {
     let newUser = new User({
         firstName: firstName,
         lastName: lastName,
         email: email,
         isVerified: isVerified,
-        phoneNumber: phoneNumber,
-        role:role
+        role:role,
+        phoneNumber: phoneNumber
     });
+
     newUser.password = newUser.generateHash(password);
     return new Promise((resolve, reject) => {
         newUser.save((err, res) => {

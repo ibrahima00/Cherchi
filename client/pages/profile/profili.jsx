@@ -14,7 +14,7 @@ class profili extends Component {
             firstName:'',
             lastName:'',
             email:'',
-            phoneNumber: 28809212
+            phoneNumber: ''
         }
         this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
         this.handleLastNameChange = this.handleLastNameChange.bind(this);
@@ -180,7 +180,7 @@ class profili extends Component {
 
                             </div>
                             <button className="ann-details">
-                                <a href="annonce.html"> Voir les details</a>
+                                <a href="/annonced"> Voir les details</a>
                                 <img src="img/flecheBleu.png" alt=""/>
                             </button>
                         </div>

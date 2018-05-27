@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const particularSchema = new Schema({
     gender : {type : String},
     picture : {type : String},
-    phoneNumber : {type : Number, min : 10000000, max : 99999999},
     situation: {type : String},
     age : {type : String },
     user : {type : Schema.Types.ObjectId, ref : 'User'},
@@ -17,11 +16,10 @@ exports.particularSchema = particularSchema;
 let Particular = mongoose.model('Particular', particularSchema);
 exports.ParticularModel = Particular;
 
-exports.addParticular = ({gender, picture, phoneNumber, situation, age,  user, adress,}) => {
+exports.addParticular = ({gender, picture, situation, age,  user, adress,}) => {
     let newParticular = new Particular({
         gender : gender,
         picture: picture,
-        phoneNumber : phoneNumber,
         situation : situation,
         age : age,
         user : user,

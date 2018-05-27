@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Button} from 'react-bootstrap';
 import Input from '../Form/Components/Input';
-
+import propTypes from 'prop-types'
 class profile extends Component {
 
 
@@ -13,7 +13,7 @@ class profile extends Component {
             firstName:'',
             lastName:'',
             email:'',
-            phoneNumber: 28809212
+            phoneNumber: ''
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
@@ -39,6 +39,8 @@ class profile extends Component {
             this.setState({firstName : res.data.user.firstName})
             this.setState({lastName : res.data.user.lastName})
             this.setState({email : res.data.user.email})
+            this.setState({phoneNumber : res.data.user.phoneNumber})
+
             console.log("mon profile is" + this.state.profile) 
         }).catch((err) => {
             console.log('err : ', err);
@@ -76,10 +78,10 @@ class profile extends Component {
       }).then(res => {
           console.log("good") ;
           console.log(res);   
-          this.setState({lastName : req.data.user.lastName})
-          this.setState({firstName : req.data.user.firstName})
-          this.setState({email : req.data.user.email})
-          this.setState({phoneNumber : req.data.user.phoneNumber})
+          this.setState({lastName : res.data.user.lastName})
+          this.setState({firstName : res.data.user.firstName})
+          this.setState({email : res.data.user.email})
+          this.setState({phoneNumber : res.data.user.phoneNumber})
          
       }).catch(err => {
           console.log('err', err);
@@ -192,7 +194,7 @@ class profile extends Component {
                                        name={'email'}  placeholder={'Ton email'}
                                        icon={'fa fa-envelpe'} label={'Email'}/>
 
-                                        <Input type={'Number'} value={this.state.phoneNumber} onUpdate={this.handlePhoneNumberChange}
+                                        <Input type={'number'} value={this.state.phoneNumber} onUpdate={this.handlePhoneNumberChange}
                                        name={'phone'}  placeholder={'numéro de telephone'}
                                        icon={'fa fa-envelpe'} label={'GSM'}/>
 

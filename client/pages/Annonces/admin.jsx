@@ -1,30 +1,152 @@
 import React, { Component } from 'react';
 import {Link,Redirect} from 'react-router-dom'
 import axios from 'axios';
-
+import propTypes from 'prop-types'
 import {browserHistory} from 'react-router-dom';
 
-
+    
 
 class Admin extends Component {
-
-
-
 
     constructor(props) {
         super(props);
         this.state = {
-            admin: []
-            
+            admin: [],
+            ads :[],
+            isVerified:false 
         }
+
+   
+        this.approuver = this.approuver.bind(this);
+        this.supprimer = this.supprimer.bind(this);
+        this.supprimerclient= this.supprimerclient.bind(this);
     }
 
 
+
+    componentDidMount() {
+        axios
+            .get('http://localhost:3040/ads/annonces/admin')
+            .then(res => {
+
+                console.log("data" + res.data)
+                this.setState({ads: res.data}
+                )
+               
+            })
+            .catch(err => console.log(err))
+    }
  
 
 
+    approuver(e) {
+        
+        //e.preventDefault();
+        e.preventDefault()
+        console.log("id" + e.currentTarget.getAttribute('data-column'));
+        var id = e.currentTarget.getAttribute('data-column');
+       console.log("requets server")
+
+        axios
+        .post('http://localhost:3040/ads/annonces/admin/approuver',{
+            id : id 
+        })
+        .then(res => {
+
+            console.log("data" + res.data)
+            this.GetAds()
+            
+           
+        })
+        .catch(err => console.log(err))
+ 
+      
+    }
+
+    supprimer(e) {
+        
+        e.preventDefault();
+        console.log("id" + e.currentTarget.getAttribute('data-column'));
+        let id = e.currentTarget.getAttribute('data-column')
+        console.log('supprimer') ;
+
+
+        axios
+        .post('http://localhost:3040/ads/annonces/admin/supprimer',{
+            id : id 
+        })
+        .then(res => {
+
+            console.log("data" + res.data)
+            
+            this.GetAds()
+           
+        })
+        .catch(err => console.log(err))
+
+        
+ 
+      
+    }
+
+    supprimerclient(e){
+
+        e.preventDefault()
+        console.log('client supprimer')
+    }
+
+
+
+//***********function get ads */
+
+GetAds ()
+{
+
+    axios
+    .get('http://localhost:3040/ads/annonces/admin')
+    .then(res => {
+
+        console.log("data" + res.data)
+        this.setState({ads: res.data}
+        )
+       
+    })
+    .catch(err => console.log(err))
+
+}
+
+
+
+
+
+
+
     render() {
+
+        
     
+
+    let {ads} = this.state 
+    console.log( this.state.ads) ;
+    const adi = ads.map(  (ad) => {
+
+
+        return <tr  key={ad._id}>
+         
+
+      
+         <td width="5%"><i className="fa fa-bell-o"></i></td>
+         <td> <h1> {ad.title } </h1></td>
+        <td> <button className="button is-small is-link" onClick={this.approuver } data-column={ad._id} >Approuver</button> </td>
+         <td><button className="button is-small is-danger" onClick={this.supprimer}  data-column={ad._id}  >Supprimer</button></td>
+
+               
+     </tr>
+     })
+     
+  
+
+  
         
         return (
 			<div>
@@ -34,8 +156,9 @@ class Admin extends Component {
             <div className="column is-3">
                 <aside className="menu">
                     <p className="menu-label">
-                        General
+                        General 
                     </p>
+
                     <ul className="menu-list">
                         <li><a className="is-active">Dashboard</a></li>
                         <li><a>Paramètres</a></li>
@@ -51,6 +174,7 @@ class Admin extends Component {
                     <div className="hero-body">
                         <div className="container">
                         <h2>It is {new Date().toLocaleTimeString()}.</h2>
+                       
                             <h1 className="title">
                                 Bienvenue, Admin.
                             </h1>
@@ -105,49 +229,9 @@ class Admin extends Component {
                                 <div className="content">
                                     <table className="table is-full width is-striped">
                                         <tbody>
-                                            <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>voiture clio 2010</td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>ordinateur portable acer 2015</td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>écran samsung 19" </td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>frigidaire samsung</td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>smartphone p8 light 2017</td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
-                                          
-                                            <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>moto yamaha stunt</td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
-                                          <tr>
-                                                <td width="5%"><i className="fa fa-bell-o"></i></td>
-                                                <td>maison s+3 (manzah6) </td>
-                                                <td><a className="button is-small is-link" href="#">Approuver</a> 
-                                                <a className="button is-small is-danger" href="#">Supprimer</a></td>
-                                            </tr>
+                                             
+                                        {  adi }
+                                                                      
                                         </tbody>
                                     </table>
                                 </div>
@@ -179,7 +263,7 @@ class Admin extends Component {
                                             <tr>
                                                 <td width="5%"><i className="fa fa-bell-o"></i></td>
                                                 <td>marco vladimir <strong style={ {color: 'red'}}>  6 foix </strong></td>
-                                                <td><a className="button is-small is-danger" href="#">Supprimer Client</a></td>
+                                                <td><button className="button is-small is-danger" onClick={this.supprimerclient}>Supprimer Client</button></td>
                                             </tr>
                                             <tr>
                                                 <td width="5%"><i className="fa fa-bell-o"></i></td>
@@ -224,8 +308,13 @@ class Admin extends Component {
     </div>
 
         )
-    };
+    }
+    
+    handleClick() {
+        console.log('Click happened');
+      }
 }
+
 Admin.propTypes = {};
 Admin.defaultProps = {};
 
